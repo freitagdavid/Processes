@@ -4,12 +4,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/wait.h>
+#include <unistd.h>
 
-int main(void)
-{
-    // Your code here
-
-    return 0;
+int main(void) {
+  // Your code here
+  int rc = fork();
+  if (rc == 0) {
+    printf("Hello\n");
+  } else if (rc > 0) {
+    waitpid(rc, NULL, 0);
+    printf("Goodbye\n");
+  }
+  return 0;
 }
